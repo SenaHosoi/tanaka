@@ -18,10 +18,10 @@ public class SubjectModel{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(length = 3, nullable = false)
+	@Column(name = "CD",length = 3, nullable = false)
 	private String cd;
 	
-	@Column(length = 20, nullable = false)
+	@Column(name = "NAME",length = 20, nullable = false)
 	private String name;
 	
 	
