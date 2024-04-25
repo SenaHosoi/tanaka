@@ -20,7 +20,7 @@ public class SubjectService {
  
 	/**
 	 * ユーザー一覧の取得
-	 * @return List<Subject>
+	 * @return List<SubjectModel>
 	 */
 	public List<SubjectModel> getSubjectList() {
 	    List<SubjectModel> entityList = subjectRepository.findAll();
@@ -39,7 +39,7 @@ public class SubjectService {
  
 	/**
 	 * データの保存
-	 * @param SubjectBook subjectBook
+	 * @param SubjectModel subjectModel
 	 */
 	public void save(@NonNull SubjectModel subjectModel) {
 		subjectRepository.save(subjectModel);

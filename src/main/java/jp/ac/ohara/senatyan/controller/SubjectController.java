@@ -34,8 +34,7 @@ public class SubjectController {
     // 科目の新規登録
     @GetMapping("/subjectadd/")
     public ModelAndView showAddForm(ModelAndView model) {
-    	SubjectModel subjectModel = new SubjectModel();
-        model.addObject("subjectModel", subjectModel);
+        model.addObject("subjectModel", new SubjectModel());
         model.setViewName("subjectadd");
         return model;
     }

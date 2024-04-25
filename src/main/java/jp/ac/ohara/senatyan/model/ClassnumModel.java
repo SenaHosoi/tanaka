@@ -19,7 +19,7 @@ public class ClassnumModel{
 	private long id;
 	
 	@Column(length = 3, nullable = false)
-	private String schoolId;
+	private String schoolCd;
 	
 	@Column(length = 5, nullable = false)
 	private String classNum;

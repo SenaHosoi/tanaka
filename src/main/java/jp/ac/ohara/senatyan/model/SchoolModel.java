@@ -19,9 +19,6 @@ public class SchoolModel{
 	private long id;
 	
 	@Column(length = 3, nullable = false)
-	private String schoolCd;
-	
-	@Column(length = 3, nullable = false)
 	private String cd;
 	
 	@Column(length = 20, nullable = false)
