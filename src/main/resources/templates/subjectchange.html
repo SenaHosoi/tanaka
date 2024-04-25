@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>科目情報編集</title>
+</head>
+<body>
+    <h1>科目変更</h1>
+    <form th:object="${subject}" th:action="@{/subjectchange/}" method="post">
+        <input type="hidden" th:value="*{id}" th:field="*{id}"/>
+        <input type="hidden" th:value="*{schoolCd}" th:field="*{schoolCd}"/>
+        <label>科目コード:</label>
+        <input type="text" th:field="*{cd}"/><br/>
+        <label>科目名:</label>
+        <input type="text" th:field="*{name}"/><br/>
+        <button type="submit">更新する</button>
+    </form>
+</body>
+</html>

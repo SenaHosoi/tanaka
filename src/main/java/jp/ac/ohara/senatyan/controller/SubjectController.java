@@ -60,11 +60,13 @@ public class SubjectController {
         model.addAttribute("subject", subject);
         return "subjectchange";
     }
-    @PostMapping("/subjectchange/{id}")
-    public String update(@PathVariable(name = "id") Long id, @ModelAttribute @Validated SubjectModel subject, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "subjectchange/" + id + "/";
+    @PostMapping("/subjectchange/")
+    public String update(@ModelAttribute @Validated SubjectModel subject, BindingResult result, Model model) {
+     	if (result.hasErrors()) {
+        	System.out.println("aa");
+            return "subjectchange/";
         }
+     	System.out.println(subject);
         subjectService.update(subject);
         return "redirect:/subjectchangecomplete/"; // 更新完了画面にリダイレクト
     }
