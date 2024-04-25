@@ -41,6 +41,7 @@ public class SubjectController {
     @PostMapping("/subjectadd/")
     public String add(@Validated @ModelAttribute @Nonnull SubjectModel subjectModel, RedirectAttributes redirectAttributes) {
         try {
+        	
         	subjectService.save(subjectModel);
             redirectAttributes.addFlashAttribute("exception", "");
         } catch (Exception e) {

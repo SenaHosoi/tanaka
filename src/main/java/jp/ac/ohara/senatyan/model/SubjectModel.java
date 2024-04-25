@@ -16,6 +16,7 @@ import lombok.Data;
 public class SubjectModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private long id;
 	
 	@Column(name = "CD",length = 3, nullable = false)
@@ -23,6 +24,9 @@ public class SubjectModel{
 	
 	@Column(name = "NAME",length = 20, nullable = false)
 	private String name;
+	
+	@Column(length = 3, nullable = true)
+	private String schoolCd;
 	
 	
 }

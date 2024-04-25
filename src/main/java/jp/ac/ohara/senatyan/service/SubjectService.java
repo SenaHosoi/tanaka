@@ -42,6 +42,7 @@ public class SubjectService {
 	 * @param SubjectModel subjectModel
 	 */
 	public void save(@NonNull SubjectModel subjectModel) {
+		System.out.println(subjectModel);
 		subjectRepository.save(subjectModel);
 	}
  
