@@ -2,8 +2,6 @@ package jp.ac.ohara.senatyan.controller;
  
 import java.util.List;
 
-import javax.security.auth.Subject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,15 +74,11 @@ public class SubjectController {
         model.setViewName("subjectchangecomplete");
         return model;
     }
-	@GetMapping("/delete/{id}")
-	public ModelAndView delete(@PathVariable(name = "id")Long id, Subject subject, ModelAndView model) {
+	@GetMapping("/subjectdelete/{id}/")
+	public ModelAndView delete(@PathVariable(name = "id")Long id, SubjectModel subject, ModelAndView model) {
 		this.subjectService.delete(id);
 		model.setViewName("subjectdelete");
 		return model;
 	}
 	
-//	@GetMapping("/Subjectadd/")
-//	public String Subjectadd(Model model) {
-//		return "Subjectadd";
-//	}
 }
