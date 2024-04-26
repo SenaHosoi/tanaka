@@ -5,21 +5,23 @@
     <title>学生情報編集</title>
 </head>
 <body>
-    <h1>Edit Student</h1>
-    <form th:object="${student}" th:action="@{/studentlist/update/{id}(id=${student.id})}" method="post">
+    <form th:object="${student}" th:action="@{/top/edit/{id}(id=${student.id})}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <label>入学年度:</label>
-        <select th:field="*{entYear}">
-            <option th:each="year : ${entYear}" th:value="${entYear}" th:text="${entYear}" th:selected="${entYear == student.entYear}"></option>
+		<input type="text" th:field="*{entYear}"/><br/>
         </select><br/>
         <label>学生番号:</label>
         <input type="text" th:field="*{no}"/><br/>
         <label>学生名:</label>
         <input type="text" th:field="*{name}"/><br/>
         <label>クラス番号:</label>
-        <select th:field="*{classNum}">
-            <option th:each="classNum : ${classNum}" th:value="${classNum}" th:text="${classNum}" th:selected="${classNum == student.classNum}"></option>
+        <input type="text" th:field="*{classNum}"/><br/>
         </select><br/>
+         <label for="isAttend">在学:</label>
+          <select class="form-control" id="isAttend" name="isAttend" th:value="${isAttend}">
+            <option value="true">在学中</option>
+            <option value="false">退学済み</option>
+          </select>
         <button type="submit">更新する</button>
     </form>
 </body>

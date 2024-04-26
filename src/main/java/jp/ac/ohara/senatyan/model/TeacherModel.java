@@ -13,13 +13,10 @@ import lombok.Data;
 @Entity
 @Table(name = "TEACHER")
 
-public class teacher{
+public class TeacherModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(length = 10, nullable = false)
-	private String Tid;
 	
 	@Column(length = 30, nullable = false)
 	private String password;

@@ -104,6 +104,20 @@ public class MainController {
 	    return "edit_student";
 	}
 	
+	@PostMapping("/top/edit/{id}")
+	public String update(@Validated @ModelAttribute @NonNull GakuseiHyou gakuseihyou, RedirectAttributes result,ModelAndView model,
+			RedirectAttributes redirectAttributes) {
+		try {
+			this.gakuseiService.save(gakuseihyou);
+			redirectAttributes.addFlashAttribute("exception", "");
+
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("exception", e.getMessage());
+		}
+		return "tourokukannryou";
+
+	}
+	
 }
 
 

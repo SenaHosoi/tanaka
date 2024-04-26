@@ -128,47 +128,48 @@
         </tr>
       </thead>
       <tbody>
-        <!-- 検
+
  
-索結果を表示する部分 -->
-        <tr th:if="${not #lists.isEmpty(searchedStudents)}" th:each="student : ${searchedStudents}">
+        <!-- 検索結果を表示する部分 -->
+        <tr th:each="student : ${list}">
           <td th:text="${student.no}"></td>
           <td th:text="${student.name}"></td>
           <td th:text="${student.entYear}"></td>
           <td th:text="${student.classNum}"></td>
           <td th:text="${student.isAttend} ? '〇' : '×'"></td>
           <td th:text="${student.schoolCd}"></td>
-          <td>
-            <a th:href="@{/top/edit/{id}(id=*{id})}">変更</a>
-          </td>
+          <td><a th:href="@{/top/edit/{student.id}(student.id=*{student.id})}">変更</a></td>
         </tr>
       </tbody>
     </table>
- 
-    <h2>学生リスト</h2>
-    <div class="table-responsive small">
-      <table class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th>入学年度</th>
-            <th>学生番号</th>
-            <th>名前</th>
-            <th>クラス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="align-middle" th:each="item, stat : ${list}" th:object="${item}">
-            <td th:text="*{entYear}"></td>
-            <td th:text="*{no}"></td>
-            <td th:text="*{name}"></td>
-            <td th:text="*{classNum}"></td>
-            <td>
-              <span th:text="*{isAttend} ? '〇' : '×'"></span>
-            </td>
-         </tbody>
-        <a class="btn btn-warning" th:href="@{/add/}">追加へ</a>
-        <h6>Click <a th:href="@{/logout}">here</a> to logout.</h6>
-      </div>
+    
+    
+    
+<!-- 検索前-->
+<!--    <h2>学生リスト</h2>-->
+<!--    <div class="table-responsive small">-->
+<!--      <table class="table table-striped table-sm">-->
+<!--        <thead>-->
+<!--          <tr>-->
+<!--            <th>入学年度</th>-->
+<!--            <th>学生番号</th>-->
+<!--            <th>名前</th>-->
+<!--            <th>クラス</th>-->
+<!--          </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--          <tr class="align-middle" th:each="item, stat : ${list}" th:object="${item}"></tr>-->
+<!--            <td th:text="*{entYear}"></td>-->
+<!--            <td th:text="*{no}"></td>-->
+<!--            <td th:text="*{name}"></td>-->
+<!--            <td th:text="*{classNum}"></td>-->
+<!--            <td><a th:href="@{/top/edit/{id}(id=*{id})}">変更</a></td>-->
+<!--            <td>-->
+<!--              <span th:text="*{isAttend} ? '〇' : '×'"></span>-->
+<!--            </td>-->
+<!--         </tbody>-->
+<!--        <a class="btn btn-warning" th:href="@{/add/}">追加へ</a>-->
+<!--      </div>-->
     </main>
   </div>
 </div>
