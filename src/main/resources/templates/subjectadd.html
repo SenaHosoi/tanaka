@@ -8,7 +8,7 @@
 	
 		    <div>
 		        <label for="cd" class="form-label">科目コード</label>
-		        <input type="text" class="form-control" id="cd" name="cd" th:field="*{cd}" placeholder="A01" required>
+		        <input type="text" class="form-control" id="cd" name="cd" th:field="*{cd}" placeholder="A01" maxlength="3" pattern="[A-Za-z0-9]{1,3}" title="三文字以内の英数字で入力してください" required>
 		    </div>
 		
 		    <div>
