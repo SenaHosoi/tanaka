@@ -27,10 +27,10 @@ public class TeacherModel implements UserDetails {
 	@Column(name = "PASSWORD", length = 256, nullable = false)
 	private String password;
 	
-	@Column(name = "NAME",length = 10, nullable = false)
+	@Column(name = "NAME",length = 10, nullable = true)
 	private String name;
 	
-	@Column(name = "SCHOOL_CD",length = 3, nullable = false)
+	@Column(name = "SCHOOL_CD",length = 3, nullable = true)
 	private String schoolCd;
 	
 	@Column(name = "TID",length = 10, nullable = false)

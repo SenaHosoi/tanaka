@@ -1,8 +1,16 @@
 package jp.ac.ohara.senatyan.controller;
  
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import jp.ac.ohara.senatyan.model.TeacherModel;
+import jp.ac.ohara.senatyan.service.Teacherservice;
  
  
 @Controller
@@ -10,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 
 public class LoginController{
+	@Autowired
+	Teacherservice teacherservice;
 
     /**
 
@@ -40,5 +50,30 @@ public class LoginController{
         return "login";
 
     }
+    
+    @GetMapping("/login/")
+    public ModelAndView login(ModelAndView model, TeacherModel teachermodel) {
+    	model.addObject("teacher", teachermodel);
+    	model.setViewName("login");
+    	return model;
+    }
+    
+    @PostMapping("/login/")
+    public String postLogin(Model model, TeacherModel teachermodel) {
+    	this.teacherservice.loadUserByUsername(teachermodel.getTid());
+    	return "redirect:/";
+    }
 
+    @GetMapping("/signup/")
+    public ModelAndView singup(ModelAndView model,TeacherModel teachermodel) {
+    	model.addObject("TeacherModel", teachermodel);
+    	model.setViewName("signup");
+    	return model;
+    }
+    
+    @PostMapping("/signup/")
+    public String signup(Model model, TeacherModel teachermodel) {
+    	teacherservice.save(teachermodel);
+    	return "login";
+    }
 }

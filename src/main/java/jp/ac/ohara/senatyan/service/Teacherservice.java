@@ -8,6 +8,10 @@ package jp.ac.ohara.senatyan.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Nonnull;
@@ -19,13 +23,16 @@ import jp.ac.ohara.senatyan.repository.TeacherRepository;
 	@Transactional
 	 
 	 
-	public class Teacherservice {
+	public class Teacherservice implements UserDetailsService {
 	 
 	 
 		
 	 
 			@Autowired
 			private TeacherRepository repository;
+			
+			@Autowired
+			private PasswordEncoder passwordencoder;
 	 
 			/**
 			 * アドレス帳一覧の取得
@@ -51,7 +58,7 @@ import jp.ac.ohara.senatyan.repository.TeacherRepository;
 			 * @param AddressBook addressBook
 			 */
 			public void save(@Nonnull TeacherModel teacher) {
-				
+				teacher.setPassword(this.passwordencoder.encode(teacher.getPassword()));
 				this.repository.save(teacher);
 				System.out.println(teacher);
 			}
@@ -86,6 +93,13 @@ import jp.ac.ohara.senatyan.repository.TeacherRepository;
 		    	TeacherModel teacher = this.repository.findById(id).orElse(null);
 		    	return teacher;
 		    	}
+		    @Override
+	 		public UserDetails loadUserByUsername(String tid)throws UsernameNotFoundException {
+	 			System.out.println("serach ID:"+tid);
+	 			TeacherModel user = this.repository.findBytidEquals(tid);
+	 			System.out.println(user.toString());
+	 			return user;
+	 		}
 		    }
-	 
+	 		
 	 

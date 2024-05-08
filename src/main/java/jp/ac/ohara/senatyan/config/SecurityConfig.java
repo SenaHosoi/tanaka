@@ -63,7 +63,7 @@ public class SecurityConfig {
 					request
  
 							.requestMatchers("/login/").permitAll() // ログインページは全許可
-							.requestMatchers("/register/").permitAll() // 新規登録ページは全許可
+							.requestMatchers("/signup/").permitAll() // 新規登録ページは全許可
 							.requestMatchers("/webjars/**").permitAll() // webjarsのパスは全許可
 							.requestMatchers("/js/**").permitAll() // JSのstaticファイル
 							.requestMatchers("/css/**").permitAll() // CSSのstaticファイル
@@ -73,8 +73,8 @@ public class SecurityConfig {
 				.formLogin(form -> {
 					form
 							.loginPage("/login/") // ログインページのURI
-							.loginProcessingUrl("/login2/") // ログインを実施するページのURI
-							.defaultSuccessUrl("/top/") // ログイン完了後の遷移先
+							.loginProcessingUrl("/login/") // ログインを実施するページのURI
+							.defaultSuccessUrl("/") // ログイン完了後の遷移先
 							.failureUrl("/login/?error=true") // ログインエラーページのURI
 							.usernameParameter("tid") // ログインユーザのname属性
 							.passwordParameter("password"); // ログインパスワードのname属性

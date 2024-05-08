@@ -13,22 +13,25 @@
             <div
                 class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
                 <div class="well">
-                    <form method="post" th:action="@{/login2/}" th:object="${teacher}">
+                    <form method="post" th:action="@{/login/}" th:object="${teacher}">
                         <fieldset>
                             <legend> ログイン </legend>
  
                             <div class="form-group">
-                                <label for="inputTid">先生id:</label> <input type="text"
-                                    id="tid" class="form-control" placeholder="先生ID"
-                                    name="tid" >
+                                <label for="inputTid">先生id:</label> 
+                                <input type="text" id="tid" class="form-control" placeholder="先生ID"
+                                    name="tid"th:field="*{tid}"/ >
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword">パスワード:</label> <input type="password"
                                     id="password" class="form-control" placeholder="password"
-                                    name="password" >
+                                    name="password"th:field="*{password}" />
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">ログイン</button>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-warning" th:href="@{/signup/}">新規登録</a>
                             </div>
                         </fieldset>
                     </form>

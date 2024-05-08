@@ -22,7 +22,7 @@ public class StudentDetailsServiceImplt implements UserDetailsService {
     @Override
     
     public UserDetails loadUserByUsername(String tid) throws UsernameNotFoundException {
-        System.out.println("serach tid : " + tid);
+        System.out.println("serach TID : " + tid);
         TeacherModel teacher = this.userRepository.findBytidEquals(tid); // emailで検索するので「EmailEquals」としている
         //System.out.println(teacher.toString());
         return teacher;
