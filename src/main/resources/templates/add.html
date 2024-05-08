@@ -2,6 +2,7 @@
     <div class="col-4">
         <select class="form-control" id="entYear" name="entYear" th:field="*{entYear}" th:classappend="${#fields.hasErrors('entYear')} ? 'is-invalid' : 'is-valid'">
             <option value="">選択してください</option>
+            <option value="2014">2014年</option>
             <!-- プルダウンメニューに2014年から2034年までのオプションを追加 -->
             <!-- JavaScriptで自動生成 -->
         </select>
