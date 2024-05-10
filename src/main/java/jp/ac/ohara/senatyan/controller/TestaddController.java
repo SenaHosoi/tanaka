@@ -5,11 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.annotation.Nonnull;
 import jp.ac.ohara.senatyan.model.GakuseiHyou;
 import jp.ac.ohara.senatyan.model.TestModel;
 import jp.ac.ohara.senatyan.service.GakuseiService;
@@ -41,11 +45,19 @@ public class TestaddController {
         model.addAttribute("searchedStudents", testaddService.filterStudents(entYear, classNum));
         return "testadd"; // 検索結果のテンプレート名を返す
 	}
-    
     @GetMapping("/testaddcomplete/")
     public ModelAndView testaddcomplete(ModelAndView model) {
         model.setViewName("testaddcomplete");
         return model;
     }
-	
+    @PostMapping("/testaddcomplete/")
+    public String testadd(@Validated @ModelAttribute @Nonnull TestModel testModel, RedirectAttributes redirectAttributes) {
+    	try {
+    		testaddService.save(testModel);
+    		redirectAttributes.addFlashAttribute("exception", "");
+    	}catch (Exception e) {
+    		redirectAttributes.addFlashAttribute("exception", e.getMessage());
+    	}
+    	return "redirect:/testaddcomplete/";
+    }
 }
