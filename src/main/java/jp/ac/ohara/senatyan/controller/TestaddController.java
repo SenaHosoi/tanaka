@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.annotation.Nonnull;
+import jakarta.servlet.http.HttpServletRequest;
 import jp.ac.ohara.senatyan.model.GakuseiHyou;
 import jp.ac.ohara.senatyan.model.TestModel;
 import jp.ac.ohara.senatyan.service.GakuseiService;
@@ -45,6 +46,32 @@ public class TestaddController {
         model.addAttribute("searchedStudents", testaddService.filterStudents(entYear, classNum));
         return "testadd"; // 検索結果のテンプレート名を返す
 	}
+    @PostMapping("/testaddsave/")
+    public String save(Model model, @ModelAttribute("TestModel") TestModel testModel, HttpServletRequest request) {
+    	//フォームで受け取った値を受け取りカンマ区切りで配列にする
+    	System.out.println("ここからすぷりっと");
+    	String[]studentNos = testModel.getStudentNo().split(",");
+    	String[]schoolCds = testModel.getSchoolCd().split(",");
+    	String[]subjectCds = testModel.getSubjectCd().split(",");
+    	String[]classNums = testModel.getClassNum().split(",");
+    	String[]nos = request.getParameterValues("no");
+    	String[]points = request.getParameterValues("point");
+    	
+    	for(int i = 0; studentNos.length > i; i++) {
+    		System.out.println(i);
+    		TestModel newTestModel = new TestModel();
+    		newTestModel.setStudentNo(studentNos[i]);
+    		newTestModel.setSchoolCd(schoolCds[i]);
+    		newTestModel.setSubjectCd(subjectCds[i]);
+    		newTestModel.setClassNum(classNums[i]);
+    		newTestModel.setNo(Integer.parseInt(nos[i]));
+    		newTestModel.setPoint(Integer.parseInt(points[i]));//intに変換
+    		// 保存されるnewTestModelの確認
+    		System.out.println(newTestModel);
+    		testaddService.save(newTestModel);
+    	}
+    	return "redirect:/testaddcomplete/";
+    }
     @GetMapping("/testaddcomplete/")
     public ModelAndView testaddcomplete(ModelAndView model) {
         model.setViewName("testaddcomplete");
