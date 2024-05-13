@@ -61,10 +61,11 @@
 		      <button type="submit" class="btn btn-primary">検索</button>
     		</form>
     		
-    		<form>
+    		<form th:action="@{/testaddcomplete/}" method="post"th:object="${test}">
 				<table class="table table-striped">
 					<thead>
-						<th>
+					<tbody>
+						<tr>
 							<th>入学年度</th>
 							<th>クラス</th>
 							<th>学生番号</th>
@@ -74,7 +75,7 @@
 					</thead>
 					<tbody>
 
- 
+
 			        <!-- 検索結果を表示する部分 -->
 			        <tr th:each="student : ${searchedStudents}">
 			          <td th:text="${student.entYear}"></td>
@@ -84,6 +85,11 @@
 			          <td>
 						  <input type="text" class="form-control" id="point" name="point" placeholder="点数" th:value="${point}">
 					  </td>
+					  <input type="hidden" id="sudentNo" name="studentNo" th:value="${student.no}">
+					  <input type="hidden" id="schoolCd" name="schoolCd" th:value="${schoolcd}">
+					  <input type="hidden" id="classNum" name="classNum" th:value="${student.classNum}">
+					  <input type="hidden" id="no" name="no" th:value="${selectno}">
+					  <input type="hidden" id="subjectCd" name="subjectCd" th:value="${selectsubjectCd}">
 			        </tr>
 			      </tbody>
 			    </table>

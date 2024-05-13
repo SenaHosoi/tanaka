@@ -3,19 +3,18 @@ package jp.ac.ohara.senatyan.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.annotation.Nonnull;
 import jakarta.servlet.http.HttpServletRequest;
 import jp.ac.ohara.senatyan.model.GakuseiHyou;
+import jp.ac.ohara.senatyan.model.TeacherModel;
 import jp.ac.ohara.senatyan.model.TestModel;
 import jp.ac.ohara.senatyan.service.GakuseiService;
 import jp.ac.ohara.senatyan.service.TestaddService;
@@ -40,16 +39,27 @@ public class TestaddController {
     public String handleListActions(
     		@RequestParam(name = "entYear") Integer entYear,
     		@RequestParam(name = "classNum") String classNum,
+    		@RequestParam(name = "subjectCd") String subjectCd,
+    		@RequestParam(name = "no") Integer no,
+    		@AuthenticationPrincipal TeacherModel teachermodel,
+    		
     		Model model) {
     	// 検索操作の場合
         System.out.println(testaddService.filterStudents(entYear, classNum));
+        System.out.println(no);
+        System.out.println(subjectCd);
         model.addAttribute("searchedStudents", testaddService.filterStudents(entYear, classNum));
+        model.addAttribute("selectno",no);
+        model.addAttribute("selectsubjectCd",subjectCd);
+        model.addAttribute("schoolcd",teachermodel.getSchoolCd());
+        System.out.print(teachermodel.getSchoolCd());
         return "testadd"; // 検索結果のテンプレート名を返す
 	}
-    @PostMapping("/testaddsave/")
+    @PostMapping("/testaddcomplete/")
     public String save(Model model, @ModelAttribute("TestModel") TestModel testModel, HttpServletRequest request) {
     	//フォームで受け取った値を受け取りカンマ区切りで配列にする
     	System.out.println("ここからすぷりっと");
+    	System.out.println(testModel);
     	String[]studentNos = testModel.getStudentNo().split(",");
     	String[]schoolCds = testModel.getSchoolCd().split(",");
     	String[]subjectCds = testModel.getSubjectCd().split(",");
@@ -77,14 +87,5 @@ public class TestaddController {
         model.setViewName("testaddcomplete");
         return model;
     }
-    @PostMapping("/testaddcomplete/")
-    public String testadd(@Validated @ModelAttribute @Nonnull TestModel testModel, RedirectAttributes redirectAttributes) {
-    	try {
-    		testaddService.save(testModel);
-    		redirectAttributes.addFlashAttribute("exception", "");
-    	}catch (Exception e) {
-    		redirectAttributes.addFlashAttribute("exception", e.getMessage());
-    	}
-    	return "redirect:/testaddcomplete/";
-    }
+   
 }
