@@ -1,6 +1,5 @@
 package jp.ac.ohara.senatyan.repository;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
