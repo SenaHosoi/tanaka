@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<h2>成績参照</h2>
+<div class="table-responsive small">
+	<table class="table table-striped table-sm">
+		<!-- 検索 -->
+		<form th:action="@{/testview/}" method="post" th:object="${test}">
+			<div class="form-row">
+				<div class="form-group col-md-4">
+		          <label for="studentNo">学生番号:</label>
+		          <input type="text" class="form-control" id="studentNo" name="studentNo" placeholder="学生番号" th:value="${studentNo}">
+		        </div>
+			</div>
+			<button type="submit" class="btn btn-primary">検索</button>
+		</form>
+		
+		<!-- 検索結果 -->
+		<form th:action="@{/testview/}" method="post"th:object="${test}">
+				<table class="table table-striped">
+					<thead>
+					<tbody>
+						<tr>
+							<th>科目コード</th>
+							<th>回数</th>
+							<th>点数</th>
+						</tr>
+					</thead>
+					<tbody>
+
+
+			        <!-- 検索結果を表示する部分 -->
+			        <tr th:each="test : ${searchedStudents}">
+			          <td th:text="${test.subjectCd}"></td>
+			          <td th:text="${test.no}"></td>
+			          <td th:text="${test.point}"></td>
+			        </tr>
+			      </tbody>
+			    </table>
+    		</form>
+</html>
