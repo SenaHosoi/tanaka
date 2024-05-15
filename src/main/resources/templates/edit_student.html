@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>学生情報編集</title>
+    <title>得点管理システム</title>
 </head>
 <body>
     <form th:object="${student}" th:action="@{/top/edit/{id}(id=${student.id})}" method="post">
@@ -23,6 +23,8 @@
             <option value="false">退学済み</option>
           </select>
         <button type="submit">更新する</button>
+        <a href="/top/">戻る</a>
+
     </form>
 </body>
 </html>
